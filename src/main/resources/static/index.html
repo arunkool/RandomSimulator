@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="lvzCGb6FUVwgjTZQSAqSBp8K4lYzPLCYNmI1JzSDdpw" name="google-site-verification"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Random Number Simulator with Google Access</title>
+
+</head>
+
+<style>
+    [ng\:cloak], [ng-cloak], .ng-cloak {
+        display: none !important;
+    }
+
+    .margin-top-5 {
+        margin-top: 10px;
+    }
+
+    .p-img {
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+
+    }
+
+    #main {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    #sidebar {
+        width: 24%;
+        height: 20%;
+        float: left;
+    }
+
+    #page-wrap {
+        width: 70%;
+        background: #ffffff;
+        height: 100px;
+        margin-left: 20%;
+    }
+</style>
+<body ng-app="SimulatorApp" ng-cloak ng-controller="AppCtrl">
+<div style="margin-top: 50px;">
+    <!-- Login panel -->
+    <div>
+        <div ng-show="!user">
+            <h1>Random Numbers Simulator Application</h1>
+            <div>
+                <div>
+                    <button onclick="window.location.href='/login'">Login</button>
+                </div>
+            </div>
+        </div>
+        <!-- End Login panel -->
+
+        <!-- Home panel. It will visible after successfull login -->
+        <div ng-show="user">
+            <div id="main">
+                <div id="sidebar">
+                    <div>
+                        <img alt="" class="p-img"
+                             ng-src="{{user.userAuthentication.details.picture}}">
+                        {{user.name}}({{user.userAuthentication.details.email}})
+                    </div>
+                    <div>
+                        <div>
+                            <i class="fa fa-sign-out" ng-click="logout()" ng-mouseover="Logout" onclick="window.location.href='/#'"
+                               style="font-size:36px"></i>
+
+                        </div>
+                    </div>
+                </div>
+                <div id="page-wrap">
+                    <div align="center"><h1>Lets start to play Random Numbers Generator !!!</h1>
+                    </div>
+                </div>
+            </div>
+
+
+            <div align="center">
+                <button ng-click="startSimulator()">Start Simutlator</button>
+            </div>
+            <!--div id="main">
+                <div id="sidebar"> <button ng-click="currentCount()">Current count</button></div>
+                <div id="page-wrap">{{ currentValue }} {{ timePeriod }}</div>
+            </div-->
+            <table style="width: 100%;">
+                <tr>
+                    <td style="width: 20%;">Last Generated No</td>
+                    <td style="width: 20%;">{{ value }}</td>
+                </tr>
+                <tr>
+                    <td style="width: 20%;">Total Count</td>
+                    <td style="width: 20%;">{{ values.length }}</td>
+                </tr>
+                <tr>
+                    <td style="width: 20%;">Max Repeated No</td>
+                    <td style="width: 20%;">{{ maxKey }}</td>
+                </tr>
+                <tr>
+                    <td style="width: 20%;">Excution Time</td>
+                    <td style="width: 20%;">{{ overallStatus }}</td>
+                </tr>
+            </table>
+            <!-- To cross check the random numbers are fine in the chart <table style="width: 100%;">
+                <tr ng-repeat="(k,v) in finalMap">
+                    <td style="width: 20%;">{{k}}</td>
+                    <td style="width: 20%;">{{v}}</td>
+                </tr>
+            </table-->
+            <div ng-show="showChartContainer" style="width: 100%;height: 50%;">
+                <canvas height="20" id="myChart" width="40"></canvas>
+            </div>
+
+
+        </div>
+        <!-- End Home Panel -->
+
+    </div>
+</div>
+
+<!-- Including Scripts -->
+<script
+        src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="app/app.js" type="text/javascript"></script>
+<script src="app/scripts/Chart_Module/Chart.js"></script>
+<script src="app/scripts/Chart_Module/angular-chart.min.js"></script>
+<script src="app/scripts/Chart_Module/tc-angular-chartjs.min.js"></script>
+<script src="app/scripts/Chart_Module/tc-angular-chartjs.js"></script>
+<script src="app/scripts/Chart_Module/angular-chart.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</body>
+</html>
