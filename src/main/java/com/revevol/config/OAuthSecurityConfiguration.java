@@ -2,6 +2,7 @@ package com.revevol.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -21,6 +22,7 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
  */
 @Configurable
 @EnableWebSecurity
+@EnableOAuth2Sso
 public class OAuthSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -76,12 +78,13 @@ public class OAuthSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http
+				.csrf().disable()
 				// starts authorizing configurations
 				.authorizeRequests()
 				// ignore the "/" and "/index.html"
 				.antMatchers("/", "/**.html", "/app/**.js").permitAll()
 				// authenticate all remaining URLS
-				.anyRequest().fullyAuthenticated()//
+				.anyRequest().authenticated()//
 				.and()//
 				// setting the logout URL "/logout" - default logout URL
 				.logout()//

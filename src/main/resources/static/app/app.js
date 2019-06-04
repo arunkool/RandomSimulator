@@ -16,6 +16,7 @@ app.controller('AppCtrl', function ($http, $rootScope, $scope, $q, $timeout) {
     $rootScope.endTime;
     $scope.max = 0;
     $scope.maxKey;
+    $scope.process = false;
 
 
     // method for getting user details
@@ -36,10 +37,11 @@ app.controller('AppCtrl', function ($http, $rootScope, $scope, $q, $timeout) {
         $scope.overallStatus = 'Running in parallel'
         var arrayOfPromises = [];
         $scope.showChartContainer = false;
+        $scope.process = true;
 
         for (var i = 0; i < 100; i++) {
             // to see the process excution , added time delay
-            var timeOut = 10;
+            var timeOut = 1;
             arrayOfPromises.push($scope.numbersGenerator(i * timeOut));
         }
         $q.all(arrayOfPromises).then(
@@ -50,6 +52,7 @@ app.controller('AppCtrl', function ($http, $rootScope, $scope, $q, $timeout) {
                 $scope.finalMap = angular.copy($rootScope.occuranceMap);
                 $scope.showChart();
                 $scope.showChartContainer = true;
+                $scope.process = false;
             }, function (failureReason) { // execute this if any promise is rejected (fails) - we don't have any reject calls in this demo
                 $scope.overallStatus = 'Failed: ' + failureReason;
             }

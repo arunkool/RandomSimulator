@@ -65,7 +65,7 @@
                     <div>
                         <img alt="" class="p-img"
                              ng-src="{{user.userAuthentication.details.picture}}">
-                        {{user.name}}({{user.userAuthentication.details.email}})
+                        {{user.userAuthentication.details.name}}({{user.userAuthentication.details.email}})
                     </div>
                     <div>
                         <div>
@@ -83,7 +83,7 @@
 
 
             <div align="center">
-                <button ng-click="startSimulator()">Start Simutlator</button>
+                <button ng-click="startSimulator()" ng-disabled="process">Start Simulator</button>
             </div>
             <!--div id="main">
                 <div id="sidebar"> <button ng-click="currentCount()">Current count</button></div>
